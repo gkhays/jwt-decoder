@@ -52,6 +52,14 @@ function analyzeJWT(token) {
         div.append(span);
         jwtLines.append(div);
         break;
+      case "iat":
+        div = $('<div class="line5"></div>');
+        span = $('<span class="highlight-yellow"></span>');
+        console.log("Analyzing line: " + token[key]);
+        span.text("Issued At: " + timeConverter(token[key]));
+        div.append(span);
+        jwtLines.append(div);
+        break;
       default:
         console.log("out of keys");
     }
