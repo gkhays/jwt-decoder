@@ -75,6 +75,10 @@ function timeConverter(timestamp) {
 }
 
 $(document).ready(function () {
+  let queryParams = new URLSearchParams(document.location.search);
+  let value = queryParams.get("token");
+  console.log("Token: " + value);
+
   $("#decode").click(function () {
     console.log("Clicked on convert button...");
 
@@ -84,5 +88,32 @@ $(document).ready(function () {
     $("#decoded").val(JSON.stringify(decoded, null, 2));
 
     analyzeJWT(decoded);
+  });
+
+  $("#token").on("click", function (e) {
+    console.log("Clicked on token field...");
+  });
+
+  $("#token").on("paste", function (event) {
+    console.log("Pasted into token field...");
+    let data = event.originalEvent.clipboardData.getData("text");
+    console.log(data);
+
+    const parts = data.split(".");
+
+    if (parts.length !== 3) {
+      console.log("Invalid JWT format");
+      return;
+    }
+
+    const [header, payload, sig] = parts;
+
+    $("#colorized")
+      .empty() // Clear the token field before adding new parts
+      .append($("<span>").text(header).css("color", "red"))
+      .append(".")
+      .append($("<span>").text(payload).css("color", "green"))
+      .append(".")
+      .append($("<span>").text(sig).css("color", "blue"));
   });
 });

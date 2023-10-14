@@ -16,6 +16,12 @@
     background-color: lightyellow;
 }
 
+.jwt-colorized {
+    /* inline-size: 1200px; */
+    inline-size: 100%;
+    overflow-wrap: break-word;
+}
+
 .preview {
     background-color: #f5f5f5;
     border: 1px black;
